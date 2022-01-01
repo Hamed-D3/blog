@@ -1,12 +1,8 @@
 from django.urls import path
-from .views import home
+from .views import home, detail
 
 app_name = 'blog'
 urlpatterns = [
-    path('', home, name='home')
+    path('', home, name='home'),
+    path('article/<slug:slug>', detail, name='detail')
 ]
-
-from django.conf import settings
-from django.conf.urls.static import static
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

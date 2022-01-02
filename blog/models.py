@@ -42,6 +42,7 @@ class Article(models.Model):
         verbose_name = "مقاله"
         # for sumation name
         verbose_name_plural = "مقالات"
+        ordering = ['-publish']
 
     def __str__(self):
         return self.title

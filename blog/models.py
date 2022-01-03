@@ -10,6 +10,12 @@ class ArticleManager(models.Manager):
         return self.filter(status='p')
 
 
+class CategoryManager(models.Manager):
+    
+    def active(self):
+        return self.filter(status=True)
+
+
 # Create your models here.
 class Category(models.Model):
     parent = models.ForeignKey('self', default=None, null=True, blank=True,
@@ -30,6 +36,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    objects = CategoryManager()
 
 
 class Article(models.Model):

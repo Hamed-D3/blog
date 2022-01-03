@@ -1,16 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
+from django.views.generic import ListView
 from .models import Article, Category
 
 # Create your views here.
-def home(request, page=1):
-    article_list = Article.objects.published()
-    paginator = Paginator(article_list, 6)
-    articles = paginator.get_page(page)
-    context = {
-        'articles': articles,
-    }
-    return render(request, 'blog/home.html', context)
+# def home(request, page=1):
+#     article_list = Article.objects.published()
+#     paginator = Paginator(article_list, 6)
+#     articles = paginator.get_page(page)
+#     context = {
+#         'articles': articles,
+#     }
+#     return render(request, 'blog/home.html', context)
+class ArticleList(ListView):
+    # model = Article
+    # template_name = 'blog/home.html'
+    # context_object_name = "articles"
+    queryset = Article.objects.published()
+    paginate_by = 6
+
 
 def detail(request, slug):
     context = {

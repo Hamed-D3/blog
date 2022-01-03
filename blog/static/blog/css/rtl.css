@@ -22,8 +22,17 @@ ul.navbar-nav.ms-auto.py-4.py-lg-0 {
 
 .site-heading h1 {
     text-align: center;
+    font-size: 3.5rem !important;
 }
 
 .post-meta {
     text-align: left;
+}
+
+.post-title {
+    font-size: 1.5rem !important;
+}
+
+.post-subtitle {
+    font-size: 1rem !important;
 }

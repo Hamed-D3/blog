@@ -68,4 +68,4 @@ class Article(models.Model):
 
 
     # set new manager for article
-    object = ArticleManager()
+    objects = ArticleManager()

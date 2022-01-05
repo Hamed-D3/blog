@@ -29,7 +29,7 @@
                 </a>
                 <p class="post-meta">
                     نوشته شده توسط
-                    <a href="#">Hamed</a>
+                    <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
                     {{article.jpublish}}
                 </p>
                 <div>

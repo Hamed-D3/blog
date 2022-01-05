@@ -2,9 +2,9 @@
 
 {% block header %}{% endblock %}
 
-{% block_next_page_url %}
+{% block previous_page_url %}
     {% url 'blog:home' page_obj.previous_page_number %}
 {% endblock %}
-{% block_next_page_url %}
+{% block next_page_url %}
     {% url 'blog:home' page_obj.next_page_number %}
 {% endblock %}

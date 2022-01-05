@@ -45,7 +45,7 @@
             {% if is_paginated %}
                 <div class="d-flex flex-end justify-content-between mb-4">
                     {% if page_obj.has_previous %}
-                    <a class="btn btn-primary text-uppercase" href="{% block_next_page_url %}{% endblock %}">&rarr; پست‌های جدید</a>
+                    <a class="btn btn-primary text-uppercase" href="{% block_previous_page_url %}{% endblock %}">&rarr; پست‌های جدید</a>
                     {% endif %}
                     {% if page_obj.has_next %}
                     <a class="btn btn-primary text-uppercase" href="{% block_next_page_url %}{% endblock %}">پست‌های قدیمی &larr;</a>

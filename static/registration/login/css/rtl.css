@@ -1,0 +1,25 @@
+@font-face {
+    font-family: Sahel;
+    src: url('../fonts/sahel/Sahel.eot');
+    src: url('../fonts/sahel/Sahel.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/sahel/Sahel.woff') format('woff'),
+         url('../fonts/sahel/Sahel.woff2') format('woff2'),
+         url('../fonts/sahel/Sahel.ttf') format('truetype');
+    font-weight: normal;
+  }
+
+
+body {
+    text-align: right !important;
+    direction: rtl !important;
+    font-family: Sahel !important;
+}
+
+.myfont, .focus-input100::after {
+    font-family: Sahel !important;
+}
+
+.btn-show-pass {
+    left: 0;
+    right: initial;
+}

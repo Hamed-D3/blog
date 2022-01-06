@@ -13,3 +13,7 @@ class User(AbstractUser):
             return True
         else:
             return False
+
+    # for show boolean shape in list display instead True and False
+    is_special_user.boolean = True
+    is_special_user.short_description = 'وضعیت کاربر ویژه'

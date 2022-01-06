@@ -58,9 +58,4 @@ class ArticleAdmin(admin.ModelAdmin):
     # create slug field from title of article
     prepopulated_fields = {'slug': ('title',)}
 
-    def category_to_str(self, obj):
-        return '، '.join([category.title for category in obj.category.active()])
-
-    category_to_str.short_description = "دسته‌بندی"
-
 admin.site.register(Article, ArticleAdmin)

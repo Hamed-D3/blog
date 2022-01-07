@@ -58,6 +58,7 @@ class Article(models.Model):
     description = models.TextField(verbose_name="محتوا")
     thumbnail = models.ImageField(upload_to='images', verbose_name="تصویر مقاله")
     publish = models.DateTimeField(default=timezone.now, verbose_name="زمان انتشار")
+    is_special = models.BooleanField(default=False, verbose_name="مقاله ویژه")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status  = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")

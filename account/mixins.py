@@ -14,7 +14,7 @@ class FieldMixin():
         return super().dispatch(request, *args, **kwargs)
 
 
-class FormValidMixi():
+class FormValidMixin():
     def form_valid(self, form):
         if self.request.user.is_superuser:
             form.save()
@@ -31,6 +31,14 @@ class AuthorAccessMixin():
         article = get_object_or_404(Article, pk=pk)
         if article.author == request.user and article.status == 'd' \
             or request.user.is_superuser:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404("You can't see this page")
+
+
+class SuperUserAccessMixin():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("You can't see this page")

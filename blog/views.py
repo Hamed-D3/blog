@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from account.models import User
+from account.mixins import SuperUserAccessMixin
 from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 from .models import Article, Category
@@ -74,3 +75,9 @@ class AuthorList(ListView):
         context = super().get_context_data(**kwargs)
         context['author'] = author
         return context
+
+
+class ArticlePreview(SuperUserAccessMixin, DetailView):
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article, pk=pk)

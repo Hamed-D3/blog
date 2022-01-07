@@ -25,7 +25,7 @@
 								{% for article in object_list %}
 								<tr>
 									<td>
-										{% if article.status == 'd' or user.is_superuser %}
+										{% if article.status in 'db'|make_list or user.is_superuser %}
 										<a href="{% url 'account:article-update' article.pk %}">{{article.title}}</a>
 										{% else %}
 										{{article.title}}
@@ -40,9 +40,18 @@
 											{% if article.status == 'p' %}
 													<span class="badge badge-success">منتشر شده</span>
 													<a href="{% url 'blog:detail' article.slug %}" target="_blank" class="badge badge-primary">نمایش</a>
-											{% else %}
-													<span class="badge badge-danger">پیش نویس</span>
+											{% elif article.status == 'i' %}
+													<span class="badge" style="background-color: #32f4df;">در حال بررسی</span>
+													{% if user.is_superuser %}
 													<a href="{% url 'blog:preview' article.pk %}" target="_blank" class="badge badge-secondary">پیش نمایش</a>
+													{% endif %}
+											{% else %}
+												{% if article.status == 'd' %}
+													<span class="badge badge-danger">پیش نویس</span>
+												{% else %}
+													<span class="badge badge-warning">برگشت داده شده</span>
+												{% endif %}
+												<a href="{% url 'blog:preview' article.pk %}" target="_blank" class="badge badge-secondary">پیش نمایش</a>
 											{% endif %}
 
 											{% if user.is_superuser %}

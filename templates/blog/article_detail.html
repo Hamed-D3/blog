@@ -10,6 +10,9 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>{{object.title}}</h1>
+                    {% if article.is_special %}
+                        <span class="badge badge-danger" style="font-size:14px; background-color: #ff0000dd; border-radius:5px">ویژه</span>
+                    {% endif %}
                     <time>{{object.jpublish}}</time>
                 </div>
             </div>
@@ -27,7 +30,8 @@
                         user == object.outhor or user.is_superuser %}
                         {{object.description|safe}}
                     {% else %}
-                        <p>این مقاله ویژه است و برای مشاهده آن باید <a href="#">اشتراک ویژه</a> تهیه کنید.</p>
+                        {{article.description|striptags|truncatewords:30}}
+                        <p class="alert alert-warning">این مقاله ویژه است و برای مشاهده آن باید <a class="alert-link" href="#">اشتراک ویژه</a> تهیه کنید.</pclass>
                     {% endif %}
                 {% else %}
                     {{object.description|safe}}

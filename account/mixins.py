@@ -4,13 +4,10 @@ from blog.models import Article
 
 class FieldMixin():
     def dispatch(self, request, *args, **kwargs):
+        self.fields = ['title', 'slug', 'category', 'description', 
+                        'thumbnail', 'publish', 'is_special', 'status']
         if request.user.is_superuser:
-            self.fields = ['author', 'title', 'slug', 'category', 'description', 'thumbnail', 'publish', 'is_special', 'status']
-        elif request.user.is_author:
-            self.fields = ['title', 'slug', 'category', 'description',
-             'thumbnail', 'publish', 'is_special']
-        else:
-            raise Http404("You can't see this page")
+            self.fields.append('author')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -21,7 +18,8 @@ class FormValidMixin():
         else:
             self.obj = form.save(commit=False)
             self.obj.author = self.request.user
-            self.obj.status = 'd'
+            if not self.obj.status == 'i':
+                self.obj.status = 'd'
         return super().form_valid(form)
 
 
@@ -46,7 +44,10 @@ class SuperUserAccessMixin():
 
 class AuthorsAccessMixin():
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_superuser or request.user.is_author:
-            return super().dispatch(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            if request.user.is_superuser or request.user.is_author:
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                return redirect('account:profile')
         else:
-            return redirect('account:profile')
+            return redirect('account:login')
